@@ -90,8 +90,7 @@ class HtmlIpsumConverter:
         while len(self.items_to_navigate) > 0:
             input_tag = self.items_to_navigate.pop()
             if type(input_tag) == bs4.NavigableString:
-                # self.process_item_text(input_tag)
-                self.current_output_item.append(input_tag)
+                self.process_item_text(input_tag)
 
             elif type(input_tag) == bs4.element.Tag:
                 self.process_item_tag(input_tag)
