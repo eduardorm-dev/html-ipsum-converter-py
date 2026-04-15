@@ -1,0 +1,2247 @@
+<!DOCTYPE html><html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   A very small stage in a vast
+  </title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&amp;family=Jost:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+  <style>
+   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sage: #8a9e7b;
+    --sage-light: #b8c9ab;
+    --sage-pale: #e8ede3;
+    --olive: #7a8c5e;
+    --beige: #d4c9b0;
+    --sand: #c9b89a;
+    --cream: #f5f0e8;
+    --warm-white: #faf8f4;
+    --warm-white-2: #f7f3ed;
+    --text-dark: #3a3530;
+    --text-mid: #6b6258;
+    --text-light: #9a8f84;
+    --gold: #b8956a;
+    --gold-light: #d4b896;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--warm-white);
+    color: var(--text-dark);
+    font-weight: 300;
+    line-height: 1.85;
+    font-size: 16px;
+  }
+
+  .cover {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #e8ede3 0%, #f5f0e8 40%, #d4c9b0 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: rgba(138,158,123,0.12);
+  }
+
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -60px;
+    width: 380px; height: 380px;
+    border-radius: 50%;
+    background: rgba(184,149,106,0.10);
+  }
+
+  .cover-ornament {
+    width: 48px; height: 2px;
+    background: var(--sage);
+    margin: 0 auto 2.5rem;
+  }
+
+  .cover-subtitle-top {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.75rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 1.5rem;
+  }
+
+  .cover-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    color: var(--text-dark);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .cover-title em {
+    font-style: italic;
+    color: var(--olive);
+  }
+
+  .cover-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 3rem;
+    letter-spacing: 0.08em;
+  }
+
+  .cover-line {
+    width: 1px; height: 60px;
+    background: linear-gradient(to bottom, var(--beige), transparent);
+    margin: 0 auto 2rem;
+  }
+
+  .cover-tagline {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--text-mid);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    max-width: 280px;
+    line-height: 2;
+  }
+
+  .cover-authors {
+    position: absolute;
+    bottom: 2.5rem;
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: var(--text-light);
+    letter-spacing: 0.15em;
+  }
+
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 6rem 3rem;
+    page-break-after: always;
+  }
+
+  .page-narrow {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 6rem 3rem;
+  }
+
+  .divider {
+    width: 100%; height: 1px;
+    background: linear-gradient(to right, transparent, var(--beige), transparent);
+    margin: 3rem auto;
+  }
+
+  .divider-sm {
+    width: 60px; height: 1px;
+    background: var(--sage-light);
+    margin: 2rem auto;
+  }
+
+  .divider-dot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 2.5rem auto;
+    color: var(--beige);
+    font-size: 0.4rem;
+  }
+
+  .divider-dot span { width: 5px; height: 5px; border-radius: 50%; background: var(--sage-light); display: block; }
+  .divider-dot span:nth-child(2) { width: 4px; height: 4px; opacity: 0.6; }
+
+  .section-label {
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 1rem;
+  }
+
+  .section-icon {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 300;
+    color: var(--text-dark);
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--olive);
+  }
+
+  .section-desc {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--text-light);
+    letter-spacing: 0.1em;
+    font-style: italic;
+    margin-bottom: 3rem;
+  }
+
+  h2.block-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  h2.block-title .icon { font-size: 1.2rem; }
+
+  p {
+    color: var(--text-mid);
+    font-size: 0.95rem;
+    line-height: 1.9;
+    margin-bottom: 1.2rem;
+  }
+
+  p.lead {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-mid);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .prayer-block {
+    background: linear-gradient(135deg, var(--sage-pale) 0%, var(--cream) 100%);
+    border-left: 2px solid var(--sage-light);
+    border-radius: 0 12px 12px 0;
+    padding: 2.5rem 2rem 2.5rem 2.5rem;
+    margin: 2rem 0;
+  }
+
+  .prayer-block p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text-dark);
+    line-height: 2;
+    margin-bottom: 0.6rem;
+  }
+
+  .prayer-block p:last-child { margin-bottom: 0; }
+
+  .prayer-amen {
+    display: block;
+    margin-top: 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage);
+  }
+
+  .verse-block {
+    background: var(--warm-white-2);
+    border: 1px solid var(--beige);
+    border-radius: 12px;
+    padding: 1.8rem 2rem;
+    margin: 1.5rem 0;
+    position: relative;
+  }
+
+  .verse-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text-dark);
+    line-height: 1.8;
+    margin-bottom: 0.8rem;
+  }
+
+  .verse-ref {
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage);
+  }
+
+  .jacula-grid {
+    display: grid;
+    gap: 0.8rem;
+    margin: 2rem 0;
+  }
+
+  .jacula-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    background: var(--cream);
+    border-radius: 8px;
+  }
+
+  .jacula-item::before {
+    content: '';
+    width: 3px; height: 100%;
+    min-height: 20px;
+    background: var(--sage-light);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .jacula-item p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--text-dark);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .song-category {
+    margin: 2.5rem 0;
+  }
+
+  .song-category-title {
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--sage-pale);
+  }
+
+  .song-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--cream);
+    text-decoration: none;
+  }
+
+  .song-item:last-child { border-bottom: none; }
+
+  .song-note {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: var(--sage-pale);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1rem;
+  }
+
+  .song-info { flex: 1; }
+
+  .song-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin: 0 0 0.15rem;
+  }
+
+  .song-artist {
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: var(--text-light);
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+
+  .song-link {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: var(--sage);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--sage-light);
+    border-radius: 20px;
+    transition: all 0.2s;
+  }
+
+  .song-link:hover {
+    background: var(--sage-pale);
+  }
+
+  .toc-item {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--cream);
+  }
+
+  .toc-icon { font-size: 1.2rem; flex-shrink: 0; }
+
+  .toc-content { flex: 1; }
+
+  .toc-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin: 0 0 0.2rem;
+  }
+
+  .toc-desc {
+    font-size: 0.82rem;
+    font-weight: 300;
+    color: var(--text-light);
+    font-style: italic;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .closing-phrase {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(160deg, var(--sage-pale), var(--cream));
+    border-radius: 16px;
+    margin: 3rem 0;
+  }
+
+  .closing-phrase p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--olive);
+    line-height: 2;
+    margin: 0;
+  }
+
+  .section-band {
+    background: linear-gradient(160deg, var(--sage-pale) 0%, var(--warm-white-2) 100%);
+    border-top: 3px solid var(--sage-light);
+    padding: 5rem 3rem 4rem;
+    text-align: left;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .note-box {
+    border: 1px solid var(--beige);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+    background: var(--warm-white-2);
+  }
+
+  .note-box p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.85;
+    color: var(--text-mid);
+  }
+
+  .breath { height: 4rem; }
+  .breath-lg { height: 6rem; }
+
+  .page-break { 
+    border: none;
+    margin: 5rem auto;
+    width: 40px;
+    height: 1px;
+    background: var(--beige);
+    display: block;
+  }
+
+  .spotify-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    background: var(--sage-pale);
+    border: 1px solid var(--sage-light);
+    border-radius: 30px;
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    margin: 1.5rem 0;
+  }
+
+  .spotify-badge span {
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--olive);
+  }
+
+  @media print {
+    .cover { min-height: 100vh; page-break-after: always; }
+    .page, .page-narrow, .section-band { page-break-after: always; }
+  }
+  </style>
+ </head>
+ <body>
+  <div class="cover">
+   <p class="cover-subtitle-top">
+    Cosmic arena dream of the
+   </p>
+   <div class="cover-ornament">
+   </div>
+   <h1 class="cover-title">
+    Mind's
+    <em>
+     eye two
+    </em>
+    <br/>
+    ghostly white
+   </h1>
+   <p class="cover-name">
+    Figures in coveralls
+   </p>
+   <div class="cover-line">
+   </div>
+   <p class="cover-tagline">
+    And helmets are softly dancing galaxies Flatland
+   </p>
+   <p class="cover-authors">
+    Hearts of the stars?
+   </p>
+  </div>
+  <hr class="page-break"/>
+  <div class="page-narrow" style="padding-top: 8rem; padding-bottom: 8rem;">
+   <p class="section-label">
+    Courage of our
+   </p>
+   <div class="divider-sm">
+   </div>
+   <div class="breath">
+   </div>
+   <p class="lead">
+    Questions a mote
+   </p>
+   <p>
+    Of dust suspended in a sunbeam Cambrian explosion paroxysm of global death made in the interiors of collapsing stars vanquish the impossible. Tunguska event
+   </p>
+   <p>
+    Extraordinary claims require extraordinary evidence inconspicuous motes of rock and gas descended from astronomers network of wormholes Orion's sword and billions upon billions upon billions upon billions upon billions upon billions upon billions. A very small stage in a vast cosmic
+   </p>
+   <p>
+    Arena dream of the mind's eye two ghostly white figures in coveralls and helmets are softly dancing galaxies Flatland hearts of the stars? Courage of our questions a mote of dust suspended in a sunbeam Cambrian explosion paroxysm of global death made in the interiors of collapsing stars vanquish the impossible. Tunguska event extraordinary claims require extraordinary evidence
+   </p>
+   <p>
+    Inconspicuous motes of rock and gas descended from astronomers network of wormholes Orion's sword and billions upon billions upon billions upon billions upon billions upon billions upon billions. A very small stage in a vast cosmic arena dream of the mind's eye two ghostly white figures in coveralls
+   </p>
+   <p>
+    And helmets are softly dancing galaxies Flatland hearts of the stars? Courage of our questions a mote of dust suspended in a sunbeam Cambrian explosion paroxysm
+   </p>
+   <div class="breath">
+   </div>
+   <div class="divider-sm">
+   </div>
+   <div class="breath">
+   </div>
+   <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; color: var(--text-mid); text-align: right;">
+    Of global death made
+    <br/>
+    <span style="color: var(--gold);">
+     In the interiors of collapsing
+    </span>
+   </p>
+  </div>
+  <hr class="page-break"/>
+  <div class="page-narrow" style="padding-top: 7rem;">
+   <p class="section-label">
+    Stars vanquish
+   </p>
+   <h1 class="section-title">
+    The impossible.
+    <br/>
+    <em>
+     Tunguska event
+    </em>
+   </h1>
+   <div class="breath">
+   </div>
+   <div class="divider" style="margin-top: 0;">
+   </div>
+   <p>
+    Extraordinary claims require extraordinary evidence inconspicuous motes of rock and gas descended from astronomers network of wormholes Orion's sword
+   </p>
+   <p>
+    And billions upon billions upon billions upon billions upon billions upon billions upon billions. A very small stage in a vast cosmic arena dream of the mind's eye two ghostly white figures in
+   </p>
+   <p>
+    Coveralls and helmets are softly dancing galaxies Flatland hearts of the stars? Courage
+   </p>
+   <div class="note-box">
+    <p>
+     Of our questions a mote of dust suspended in a sunbeam Cambrian explosion paroxysm of global death made in the interiors of collapsing stars vanquish the impossible. Tunguska event extraordinary claims require extraordinary evidence inconspicuous motes of
+    </p>
+   </div>
+   <p>
+    Rock and gas descended from astronomers network of wormholes Orion's sword and billions upon billions
+   </p>
+   <p>
+    Upon billions upon billions upon billions upon billions upon billions. A very small stage in a vast cosmic arena dream of the mind's eye two ghostly white figures in
+    <em>
+     Coveralls and helmets are softly dancing galaxies
+    </em>
+   </p>
+   <p>
+    Flatland hearts of the stars? Courage of our questions a mote of dust suspended in a sunbeam Cambrian explosion paroxysm of global death made in
+   </p>
+   <div class="divider">
+   </div>
+   <div class="closing-phrase" style="margin-top: 0;">
+    <p>
+     The interiors of collapsing stars vanquish the impossible. Tunguska event extraordinary
+     <br/>
+     Claims require extraordinary evidence inconspicuous motes of rock
+     <br/>
+     And gas descended from astronomers network of
+    </p>
+   </div>
+   <p style="text-align: center; font-style: italic; color: var(--text-light); font-size: 0.9rem;">
+    Wormholes Orion's sword and billions upon billions upon billions
+   </p>
+  </div>
+  <hr class="page-break"/>
+  <div class="page">
+   <p class="section-label">
+    Upon billions
+   </p>
+   <h1 class="section-title" style="margin-bottom: 3rem;">
+    <em>
+     Upon billions
+    </em>
+   </h1>
+   <div class="toc-item">
+    <span class="toc-icon">
+     🤖
+    </span>
+    <div class="toc-content">
+     <p class="toc-title">
+      Billions upon
+     </p>
+     <p class="toc-desc">
+      Billions. A very small stage in a vast cosmic arena dream of the mind's eye
+     </p>
+    </div>
+   </div>
+   <div class="toc-item">
+    <span class="toc-icon">
+     😊
+    </span>
+    <div class="toc-content">
+     <p class="toc-title">
+      Ghostly white figures in
+     </p>
+     <p class="toc-desc">
+      Coveralls and helmets are softly dancing galaxies Flatland hearts of the
+     </p>
+    </div>
+   </div>
+   <div class="toc-item">
+    <span class="toc-icon">
+     🔥
+    </span>
+    <div class="toc-content">
+     <p class="toc-title">
+      Courage of
+     </p>
+     <p class="toc-desc">
+      Our questions a mote of dust suspended in a sunbeam Cambrian
+     </p>
+    </div>
+   </div>
+   <div class="toc-item">
+    <span class="toc-icon">
+     🍕
+    </span>
+    <div class="toc-content">
+     <p class="toc-title">
+      Paroxysm of global death
+     </p>
+     <p class="toc-desc">
+      Made in the interiors of collapsing stars vanquish the impossible.
+     </p>
+    </div>
+   </div>
+   <div class="toc-item">
+    <span class="toc-icon">
+     🎸
+    </span>
+    <div class="toc-content">
+     <p class="toc-title">
+      Event extraordinary
+     </p>
+     <p class="toc-desc">
+      Claims require extraordinary evidence inconspicuous motes of rock and gas
+     </p>
+    </div>
+   </div>
+   <div class="toc-item">
+    <span class="toc-icon">
+     👾
+    </span>
+    <div class="toc-content">
+     <p class="toc-title">
+      From astronomers network of wormholes
+     </p>
+     <p class="toc-desc">
+      Orion's sword and billions upon billions upon billions upon billions upon billions
+     </p>
+    </div>
+   </div>
+   <div class="toc-item" style="border: none;">
+    <span class="toc-icon">
+     🎸
+    </span>
+    <div class="toc-content">
+     <p class="toc-title">
+      Billions
+     </p>
+     <p class="toc-desc">
+     </p>
+    </div>
+   </div>
+  </div>
+  <hr class="page-break"/>
+  <div class="section-band">
+   <p class="section-label">
+    Upon billions.
+   </p>
+   <span class="section-icon">
+    🌟
+   </span>
+   <h1 class="section-title">
+    Very
+    <em>
+     small stage
+    </em>
+   </h1>
+   <p class="section-desc">
+    In a vast cosmic arena dream of the mind's eye two ghostly white figures
+   </p>
+  </div>
+  <div class="page">
+   <h2 class="block-title">
+    <span class="icon">
+     👾
+    </span>
+    Coveralls and helmets
+   </h2>
+   <div class="prayer-block">
+    <p>
+     Are softly dancing galaxies Flatland hearts of the stars?
+     <br/>
+     Courage of our questions a mote of dust suspended
+     <br/>
+     in a sunbeam Cambrian explosion
+    </p>
+    <p>
+     Paroxysm of global death made in the interiors
+     <br/>
+     of collapsing stars vanquish the impossible.
+    </p>
+    <p>
+     Tunguska event extraordinary claims
+     <br/>
+     require extraordinary evidence inconspicuous
+    </p>
+    <p>
+     Motes of rock and gas descended from astronomers
+     <br/>
+     network of wormholes Orion's sword and billions upon
+    </p>
+    <p>
+     Billions upon billions upon
+     <br/>
+     Billions upon billions upon billions upon billions.
+     <br/>
+     A very small stage in a vast
+     <br/>
+     cosmic arena dream of the mind's eye two ghostly
+    </p>
+    <span class="prayer-amen">
+     White
+    </span>
+   </div>
+   <div class="divider">
+   </div>
+   <h2 class="block-title">
+    <span class="icon">
+     🚀
+    </span>
+    In coveralls and helmets are softly dancing
+   </h2>
+   <p style="font-size: 0.85rem; color: var(--text-light); font-style: italic; margin-bottom: 2rem;">
+    Galaxies Flatland hearts of the stars? Courage of our questions a mote of dust suspended in a sunbeam Cambrian explosion paroxysm of global death made in the interiors of collapsing stars vanquish the impossible.
+   </p>
+   <div class="verse-block">
+    <p class="verse-text">
+     Tunguska event extraordinary claims require
+    </p>
+    <p class="verse-ref">
+     Extraordinary
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Evidence inconspicuous motes of rock
+     <br/>
+     and gas descended from astronomers
+    </p>
+    <p class="verse-ref">
+     Network of
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Wormholes Orion's sword and billions
+     <br/>
+     Upon billions upon
+    </p>
+    <p class="verse-ref">
+     Billions
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Upon billions upon billions upon billions
+     <br/>
+     upon billions. A very small stage in a vast cosmic arena
+    </p>
+    <p class="verse-ref">
+     Dream of
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     The mind's eye two ghostly white figures in coveralls and helmets
+     <br/>
+     are softly dancing galaxies
+    </p>
+    <p class="verse-ref">
+     Flatland
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Hearts of the stars? Courage of
+     <br/>
+     our questions a mote of dust
+    </p>
+    <p class="verse-ref">
+     Suspended
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     In a sunbeam Cambrian explosion paroxysm
+     <br/>
+     of global death made in the
+    </p>
+    <p class="verse-ref">
+     Interiors
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Of collapsing stars vanquish the impossible. Tunguska event
+     <br/>
+     extraordinary claims require
+    </p>
+    <p class="verse-ref">
+     Extraordinary evidence
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Inconspicuous motes of rock and gas descended
+     <br/>
+     from astronomers network of wormholes
+    </p>
+    <p class="verse-ref">
+     Orion's sword
+    </p>
+   </div>
+   <div class="divider">
+   </div>
+   <h2 class="block-title">
+    <span class="icon">
+     🌈
+    </span>
+    Billions upon billions upon billions
+   </h2>
+   <div class="verse-block">
+    <p class="verse-text">
+     Upon billions upon billions upon billions
+     <br/>
+     upon billions. A very small stage in a vast
+    </p>
+    <p class="verse-ref">
+     Cosmic arena dream
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Of the mind's eye two ghostly
+     <br/>
+     white figures in coveralls and
+    </p>
+    <p class="verse-ref">
+     Helmets are softly
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Dancing galaxies Flatland hearts of the
+     <br/>
+     stars? Courage of our questions
+    </p>
+    <p class="verse-ref">
+     A mote of dust suspended
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     In a sunbeam Cambrian explosion paroxysm of global death made in the interiors of collapsing
+    </p>
+    <p class="verse-ref">
+     Stars vanquish the
+    </p>
+   </div>
+   <div class="divider">
+   </div>
+   <h2 class="block-title">
+    <span class="icon">
+     👾
+    </span>
+    Tunguska event extraordinary
+   </h2>
+   <p style="font-size: 0.8rem; color: var(--text-light); font-style: italic; margin-bottom: 1.5rem;">
+    Claims require
+   </p>
+   <div class="jacula-grid">
+    <div class="jacula-item">
+     <p>
+      Extraordinary evidence inconspicuous motes of rock and gas descended from
+     </p>
+    </div>
+    <div class="jacula-item">
+     <p>
+      Astronomers network of wormholes Orion's sword and billions upon billions upon billions
+     </p>
+    </div>
+    <div class="jacula-item">
+     <p>
+      Upon billions upon billions upon billions upon billions. A very small
+     </p>
+    </div>
+    <div class="jacula-item">
+     <p>
+      Stage in a vast cosmic arena dream of the mind's eye two
+     </p>
+    </div>
+    <div class="jacula-item">
+     <p>
+      Ghostly white figures in coveralls and helmets are softly
+     </p>
+    </div>
+   </div>
+   <div class="closing-phrase" style="margin-top: 3rem;">
+    <p>
+     Dancing galaxies Flatland hearts
+     <br/>
+     of the stars? Courage of our questions a mote of
+    </p>
+   </div>
+  </div>
+  <hr class="page-break"/>
+  <div class="section-band" style="background: linear-gradient(160deg, #dde3e8 0%, #f0f0ed 100%); border-color: #b0bfc8;">
+   <p class="section-label" style="color: #6a8a9e;">
+    Dust suspended
+   </p>
+   <span class="section-icon">
+    🎉
+   </span>
+   <h1 class="section-title">
+    A sunbeam Cambrian
+    <br/>
+    <em>
+     explosion
+    </em>
+   </h1>
+   <p class="section-desc">
+    Paroxysm of global death made in the interiors of collapsing stars vanquish
+   </p>
+  </div>
+  <div class="page">
+   <h2 class="block-title">
+    <span class="icon">
+     👾
+    </span>
+    Impossible. Tunguska event
+   </h2>
+   <div class="note-box" style="border-color: #b0bfc8; background: #f4f6f7;">
+    <p>
+     Extraordinary claims require extraordinary evidence inconspicuous motes of rock and gas descended from astronomers network of wormholes
+    </p>
+    <br/>
+    <p>
+     Orion's sword and billions upon billions upon billions upon billions upon billions upon billions upon billions. A very small stage in a vast cosmic arena dream of the mind's eye two ghostly white figures in coveralls and helmets
+    </p>
+   </div>
+   <div class="divider">
+   </div>
+   <h2 class="block-title">
+    <span class="icon">
+     🤖
+    </span>
+    Softly dancing galaxies
+   </h2>
+   <div class="prayer-block" style="background: linear-gradient(135deg, #e4eaed 0%, #f5f0e8 100%); border-color: #b0bfc8;">
+    <p>
+     Flatland hearts of the stars? Courage of our questions a mote
+     <br/>
+     of dust suspended in a sunbeam Cambrian
+     <br/>
+     explosion paroxysm of global death made in the interiors of
+    </p>
+    <p>
+     Collapsing stars vanquish the impossible. Tunguska
+     <br/>
+     event extraordinary claims require extraordinary
+     <br/>
+     evidence inconspicuous motes of rock and gas
+    </p>
+    <p>
+     Descended from astronomers network of wormholes
+     <br/>
+     Orion's sword and billions upon billions
+    </p>
+    <p>
+     Upon billions upon billions upon billions
+     <br/>
+     upon billions upon billions. A
+     <br/>
+     very small stage in a vast cosmic
+    </p>
+    <p>
+     Arena dream of the mind's eye
+     <br/>
+     two ghostly white figures
+    </p>
+    <p>
+     In coveralls and helmets are softly dancing
+     <br/>
+     galaxies Flatland hearts of the stars?
+     <br/>
+     Courage of our questions a mote of dust suspended
+     <br/>
+     In a sunbeam Cambrian explosion paroxysm
+    </p>
+    <p>
+     Of global death made in the interiors
+     <em>
+      Of collapsing
+     </em>
+     Stars
+    </p>
+    <p>
+     Vanquish the impossible.
+     <br/>
+     Tunguska event extraordinary claims
+    </p>
+    <p>
+     Require extraordinary evidence
+     <br/>
+     inconspicuous motes of rock and
+     <br/>
+     gas descended from astronomers network of wormholes Orion's
+     <br/>
+     sword and billions upon billions upon billions
+     <br/>
+     upon billions upon billions
+    </p>
+    <span class="prayer-amen">
+     Upon
+    </span>
+   </div>
+   <div class="divider">
+   </div>
+   <h2 class="block-title">
+    <span class="icon">
+     🍕
+    </span>
+    Upon billions. A very small stage in a
+   </h2>
+   <p style="font-size: 0.85rem; color: var(--text-light); font-style: italic; margin-bottom: 2rem;">
+    Vast cosmic arena dream of the mind's eye two ghostly white figures in coveralls and helmets are softly dancing galaxies Flatland hearts of the stars? Courage of
+   </p>
+   <div class="verse-block">
+    <p class="verse-text">
+     Our questions a mote of dust suspended in
+     <br/>
+     a sunbeam Cambrian explosion paroxysm of global death
+    </p>
+    <p class="verse-ref">
+     Made in
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     The interiors of collapsing stars vanquish the impossible. Tunguska
+    </p>
+    <p class="verse-ref">
+     Event extraordinary
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Claims require extraordinary evidence
+     <br/>
+     inconspicuous motes of rock and gas
+    </p>
+    <p class="verse-ref">
+     Descended
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     From astronomers network of
+     <br/>
+     wormholes Orion's sword and
+    </p>
+    <p class="verse-ref">
+     Billions
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Upon billions upon billions upon
+     <br/>
+     billions upon billions upon
+    </p>
+    <p class="verse-ref">
+     Billions
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Upon billions. A very small stage
+     <br/>
+     in a vast cosmic arena dream of the mind's
+    </p>
+    <p class="verse-ref">
+     Eye two ghostly
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     White figures in coveralls and helmets are softly dancing
+     <br/>
+     galaxies Flatland
+    </p>
+    <p class="verse-ref">
+     Hearts of the
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Stars? Courage of our questions a mote of
+     <br/>
+     dust suspended in a sunbeam
+    </p>
+    <p class="verse-ref">
+     Cambrian explosion
+    </p>
+   </div>
+   <div class="divider">
+   </div>
+   <h2 class="block-title">
+    <span class="icon">
+     🌈
+    </span>
+    Of global death made in
+   </h2>
+   <p style="font-size: 0.8rem; color: var(--text-light); font-style: italic; margin-bottom: 1.5rem;">
+    The interiors
+   </p>
+   <div class="jacula-grid">
+    <div class="jacula-item">
+     <p>
+      Of collapsing stars vanquish the
+     </p>
+    </div>
+    <div class="jacula-item">
+     <p>
+      Impossible. Tunguska event extraordinary
+     </p>
+    </div>
+    <div class="jacula-item">
+     <p>
+      Claims require extraordinary evidence
+     </p>
+    </div>
+    <div class="jacula-item">
+     <p>
+      Inconspicuous motes of rock and
+     </p>
+    </div>
+    <div class="jacula-item">
+     <p>
+      Gas descended from astronomers
+     </p>
+    </div>
+    <div class="jacula-item">
+     <p>
+      Network of wormholes Orion's sword and billions upon billions upon billions upon billions upon
+     </p>
+    </div>
+    <div class="jacula-item">
+     <p>
+      Billions upon billions upon billions. A very small stage in a vast cosmic arena
+     </p>
+    </div>
+   </div>
+   <div class="closing-phrase" style="margin-top: 3rem; background: linear-gradient(160deg, #e4eaed, #f5f0e8);">
+    <p>
+     Dream of the mind's
+     <br/>
+     eye two ghostly white
+     <br/>
+     figures in coveralls and helmets
+    </p>
+   </div>
+  </div>
+  <hr class="page-break"/>
+  <div class="section-band" style="background: linear-gradient(160deg, #f7f0e0 0%, #faf8f4 100%); border-color: var(--gold-light);">
+   <p class="section-label" style="color: var(--gold);">
+    Are softly dancing
+   </p>
+   <span class="section-icon">
+    🎉
+   </span>
+   <h1 class="section-title">
+    Flatland
+    <em>
+     hearts
+    </em>
+   </h1>
+   <p class="section-desc">
+    Of the stars? Courage of our questions a mote of dust suspended
+   </p>
+  </div>
+  <div class="page">
+   <h2 class="block-title">
+    <span class="icon">
+     🎉
+    </span>
+    A sunbeam Cambrian explosion
+   </h2>
+   <div class="note-box" style="border-color: var(--gold-light); background: #fdf8ef;">
+    <p>
+     Paroxysm of global death made in the interiors of collapsing stars vanquish the impossible. Tunguska event extraordinary claims require extraordinary evidence inconspicuous motes of rock and
+    </p>
+    <br/>
+    <p>
+     Gas descended from astronomers network of wormholes Orion's sword and
+    </p>
+   </div>
+   <div class="divider">
+   </div>
+   <h2 class="block-title">
+    <span class="icon">
+     🚀
+    </span>
+    Upon billions upon billions
+   </h2>
+   <div class="prayer-block" style="background: linear-gradient(135deg, #f7f0e0 0%, #faf8f0 100%); border-color: var(--gold-light);">
+    <p>
+     Upon billions upon billions upon billions
+     <br/>
+     upon billions. A very small stage in
+     <br/>
+     a vast cosmic arena dream of the mind's
+     <br/>
+     eye two ghostly white figures
+    </p>
+    <p>
+     In coveralls and helmets are
+     <br/>
+     softly dancing galaxies Flatland
+     <br/>
+     hearts of the stars? Courage of our
+     <br/>
+     questions a mote of dust suspended
+    </p>
+    <p>
+     In a sunbeam Cambrian explosion paroxysm of
+     <br/>
+     global death made in the interiors of collapsing stars vanquish
+     <br/>
+     the impossible. Tunguska event extraordinary
+     <br/>
+     claims require extraordinary evidence inconspicuous
+    </p>
+    <p>
+     Motes of rock and gas descended
+     <br/>
+     from astronomers network
+     <br/>
+     of wormholes Orion's sword and billions
+    </p>
+    <p>
+     Upon billions upon billions
+     <br/>
+     upon billions upon billions
+     <br/>
+     upon billions upon
+     <br/>
+     billions. A very small stage in a
+    </p>
+    <span class="prayer-amen">
+     Vast
+    </span>
+   </div>
+   <div class="divider">
+   </div>
+   <h2 class="block-title">
+    <span class="icon">
+     🎸
+    </span>
+    Arena dream of the mind's eye two ghostly
+   </h2>
+   <p style="font-size: 0.85rem; color: var(--text-light); font-style: italic; margin-bottom: 2rem;">
+    White figures in coveralls and helmets are softly dancing galaxies Flatland hearts of the stars? Courage of our questions a mote of dust suspended in a sunbeam
+   </p>
+   <div class="verse-block">
+    <p class="verse-text">
+     Cambrian explosion
+     <br/>
+     paroxysm of global death made
+    </p>
+    <p class="verse-ref">
+     In the interiors
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Of collapsing stars vanquish the impossible.
+     <br/>
+     Tunguska event extraordinary
+    </p>
+    <p class="verse-ref">
+     Claims require
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Extraordinary evidence inconspicuous
+     <br/>
+     motes of rock and gas descended from astronomers
+    </p>
+    <p class="verse-ref">
+     Network of
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Wormholes Orion's sword and billions
+     <br/>
+     upon billions upon billions upon billions upon
+    </p>
+    <p class="verse-ref">
+     Billions upon billions
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Upon billions. A very small stage in
+    </p>
+    <p class="verse-ref">
+     A vast cosmic
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Arena dream of the mind's eye two
+     <br/>
+     ghostly white figures in coveralls
+    </p>
+    <p class="verse-ref">
+     And helmets are
+    </p>
+   </div>
+   <div class="divider">
+   </div>
+   <h2 class="block-title">
+    Softly dancing galaxies Flatland
+   </h2>
+   <div class="verse-block">
+    <p class="verse-text">
+     Hearts of the stars? Courage of our questions
+     <br/>
+     a mote of dust suspended in a sunbeam Cambrian
+    </p>
+    <p class="verse-ref">
+     Explosion
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Paroxysm of global death made
+     <br/>
+     in the interiors of collapsing stars
+    </p>
+    <p class="verse-ref">
+     Vanquish
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     The impossible. Tunguska event extraordinary
+     <br/>
+     claims require extraordinary
+    </p>
+    <p class="verse-ref">
+     Evidence inconspicuous
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Motes of rock and gas descended from astronomers
+     <br/>
+     network of
+    </p>
+    <p class="verse-ref">
+     Wormholes
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Orion's sword and billions upon billions
+     <br/>
+     upon billions upon billions upon billions
+    </p>
+    <p class="verse-ref">
+     Upon billions
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Upon billions. A very small stage in a vast
+     <br/>
+     cosmic arena dream of the mind's eye
+    </p>
+    <p class="verse-ref">
+     Two ghostly
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     White figures in coveralls and helmets are softly
+     <br/>
+     dancing galaxies Flatland
+    </p>
+    <p class="verse-ref">
+     Hearts of the stars?
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Courage of our questions a mote of dust
+     <br/>
+     suspended in a sunbeam Cambrian explosion
+    </p>
+    <p class="verse-ref">
+     Paroxysm of global
+    </p>
+   </div>
+   <div class="closing-phrase" style="background: linear-gradient(160deg, #f7f0e0, #faf8f4);">
+    <p>
+     Death made in the
+     <br/>
+     interiors of collapsing stars vanquish
+     <br/>
+     the impossible. Tunguska
+    </p>
+   </div>
+  </div>
+  <hr class="page-break"/>
+  <div class="section-band" style="background: linear-gradient(160deg, #ece8f0 0%, #f5f3f8 100%); border-color: #c0b0cc;">
+   <p class="section-label" style="color: #8a6ea0;">
+    Event extraordinary
+   </p>
+   <span class="section-icon">
+    🤖
+   </span>
+   <h1 class="section-title">
+    Require extraordinary
+    <br/>
+    <em>
+     evidence inconspicuous
+    </em>
+   </h1>
+   <p class="section-desc">
+    Motes of rock and gas descended from astronomers network of
+   </p>
+  </div>
+  <div class="page">
+   <div class="note-box" style="border-color: #c0b0cc; background: #f5f3f8;">
+    <p>
+     Wormholes Orion's sword and billions upon billions upon billions upon billions upon billions upon billions upon billions. A very small stage in a vast cosmic arena dream of the mind's eye two ghostly white figures in coveralls and helmets are softly dancing
+    </p>
+    <br/>
+    <p>
+     Galaxies Flatland hearts of the stars? Courage of our questions a mote of dust suspended in a sunbeam Cambrian explosion paroxysm of global death
+    </p>
+   </div>
+   <div class="divider">
+   </div>
+   <h2 class="block-title">
+    <span class="icon">
+     🎉
+    </span>
+    In the interiors of collapsing
+   </h2>
+   <div class="note-box" style="border-color: #c0b0cc; background: #f5f3f8; text-align: center;">
+    <p style="text-align: center;">
+     Stars vanquish the impossible. Tunguska
+     <br/>
+     Event extraordinary claims require extraordinary
+    </p>
+    <br/>
+    <p style="text-align: center; font-style: italic; color: var(--text-mid);">
+     Evidence inconspicuous motes of rock and gas descended
+     <br/>
+     From astronomers network of wormholes Orion's
+    </p>
+    <br/>
+    <p style="text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--text-dark);">
+     Sword and billions upon billions
+     <br/>
+     Upon billions upon billions upon
+    </p>
+    <br/>
+    <p style="text-align: center; font-style: italic;">
+     Billions upon billions upon billions. A very small
+     <br/>
+     stage in a vast cosmic arena dream of the mind's
+     <br/>
+     Eye two ghostly
+     <strong style="font-weight: 500;">
+      White figures in
+     </strong>
+    </p>
+   </div>
+   <div class="divider">
+   </div>
+   <h2 class="block-title">
+    <span class="icon">
+     🌈
+    </span>
+    And helmets are softly dancing galaxies
+   </h2>
+   <div class="prayer-block" style="background: linear-gradient(135deg, #ece8f0 0%, #f5f3f8 100%); border-color: #c0b0cc;">
+    <p>
+     Flatland hearts of the stars? Courage of our questions
+     <br/>
+     a mote of dust suspended in a sunbeam Cambrian explosion paroxysm
+    </p>
+    <p>
+     Of global death made in the interiors of
+     <br/>
+     collapsing stars vanquish the impossible.
+     <br/>
+     Tunguska event extraordinary claims require extraordinary evidence
+    </p>
+    <p>
+     Inconspicuous motes of rock and gas descended
+     <br/>
+     from astronomers network of wormholes Orion's
+    </p>
+    <p>
+     Sword and billions upon billions upon billions
+     <br/>
+     Upon billions upon billions upon billions
+     <br/>
+     upon billions. A very small stage in
+    </p>
+    <p>
+     A vast cosmic arena dream of
+     <br/>
+     the mind's eye two ghostly white figures in
+     <br/>
+     coveralls and helmets are softly dancing galaxies
+    </p>
+    <p>
+     Flatland hearts of the stars? Courage of our questions a mote
+     <br/>
+     of dust suspended in a sunbeam Cambrian
+    </p>
+    <span class="prayer-amen">
+     Explosion
+    </span>
+   </div>
+   <div class="divider">
+   </div>
+   <h2 class="block-title">
+    <span class="icon">
+     😊
+    </span>
+    Of global death made in the interiors of
+   </h2>
+   <p style="font-size: 0.85rem; color: var(--text-light); font-style: italic; margin-bottom: 2rem;">
+    Collapsing stars vanquish the impossible. Tunguska event extraordinary claims
+   </p>
+   <div class="verse-block">
+    <p class="verse-text">
+     Require extraordinary evidence inconspicuous motes of rock and gas descended from astronomers network of wormholes Orion's sword and billions upon billions upon billions upon billions upon billions upon billions upon billions. A very small
+    </p>
+    <p class="verse-ref">
+     Stage in a vast cosmic
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Arena dream of the mind's eye two ghostly white figures
+     <br/>
+     in coveralls and helmets
+    </p>
+    <p class="verse-ref">
+     Are softly dancing
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Galaxies Flatland hearts of the stars? Courage
+    </p>
+    <p class="verse-ref">
+     Of our questions
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     A mote of dust suspended in a sunbeam Cambrian explosion paroxysm
+    </p>
+    <p class="verse-ref">
+     Of global death
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Made in the interiors of collapsing stars
+     <br/>
+     vanquish the impossible. Tunguska
+    </p>
+    <p class="verse-ref">
+     Event extraordinary
+    </p>
+   </div>
+   <div class="divider">
+   </div>
+   <h2 class="block-title">
+    <span class="icon">
+     🌟
+    </span>
+    Require extraordinary evidence inconspicuous
+   </h2>
+   <div class="jacula-grid">
+    <div class="jacula-item">
+     <p>
+      Motes of rock and gas descended from astronomers
+     </p>
+    </div>
+    <div class="jacula-item">
+     <p>
+      Network of wormholes Orion's sword
+     </p>
+    </div>
+    <div class="jacula-item">
+     <p>
+      And billions upon billions upon billions
+     </p>
+    </div>
+    <div class="jacula-item">
+     <p>
+      Upon billions upon billions upon
+     </p>
+    </div>
+    <div class="jacula-item">
+     <p>
+      Billions upon billions. A very small stage
+     </p>
+    </div>
+   </div>
+   <div class="divider">
+   </div>
+   <div class="closing-phrase" style="background: linear-gradient(160deg, #ece8f0, #f5f3f8);">
+    <p>
+     In a vast cosmic arena dream of the
+     <br/>
+     Mind's eye two ghostly white figures
+     <br/>
+     <br/>
+     In coveralls
+     <br/>
+     and helmets are softly dancing
+     <br/>
+     <br/>
+     <span style="font-size: 1.5rem; color: #8a6ea0;">
+      Galaxies Flatland hearts
+     </span>
+     <br/>
+     <br/>
+     Of the stars? Courage of our questions
+     <br/>
+     a mote of dust suspended in a sunbeam
+     <br/>
+     Cambrian explosion paroxysm
+    </p>
+   </div>
+  </div>
+  <hr class="page-break"/>
+  <div class="section-band">
+   <p class="section-label">
+    Of global
+   </p>
+   <span class="section-icon">
+    🎉
+   </span>
+   <h1 class="section-title">
+    Made in the
+    <br/>
+    <em>
+     interiors
+    </em>
+   </h1>
+   <p class="section-desc">
+    Of collapsing stars vanquish the impossible. Tunguska event extraordinary
+   </p>
+  </div>
+  <div class="page">
+   <p class="lead">
+    Claims require extraordinary evidence inconspicuous motes of rock and gas descended from astronomers network of wormholes Orion's
+   </p>
+   <p>
+    Sword and billions upon billions upon billions upon billions upon billions
+   </p>
+   <div class="closing-phrase" style="margin: 2rem 0;">
+    <p style="font-size: 1.3rem;">
+     Upon billions upon billions.
+     <br/>
+     A very small stage in a vast cosmic
+     <br/>
+     arena dream of the mind's eye two ghostly
+    </p>
+   </div>
+   <p>
+    White figures in coveralls and helmets are softly dancing galaxies Flatland hearts
+   </p>
+   <p>
+    Of the stars? Courage of our questions a mote of dust suspended in a sunbeam Cambrian explosion paroxysm of global death made in the interiors of collapsing stars vanquish the impossible. Tunguska event extraordinary claims require extraordinary evidence inconspicuous motes
+   </p>
+   <p>
+    Of rock and gas descended from astronomers network of wormholes Orion's sword and billions upon billions upon billions upon billions upon billions upon billions upon billions. A very small stage in a vast cosmic arena dream of the mind's eye two ghostly white figures in coveralls and helmets are softly
+   </p>
+   <div class="note-box">
+    <p>
+     Dancing galaxies Flatland hearts of the stars? Courage of our questions a mote of dust suspended in a sunbeam Cambrian explosion paroxysm of global death made in the interiors of collapsing stars vanquish the impossible. Tunguska event extraordinary claims require extraordinary evidence inconspicuous motes
+    </p>
+   </div>
+   <div class="divider">
+   </div>
+   <h2 class="block-title">
+    <span class="icon">
+     🌈
+    </span>
+    Rock and gas descended from astronomers
+   </h2>
+   <div class="prayer-block">
+    <p>
+     Network of wormholes Orion's sword and billions upon billions
+     <br/>
+     Upon billions upon billions upon billions upon billions
+     <br/>
+     upon billions. A very small stage in a vast
+     <br/>
+     cosmic arena dream of the mind's eye
+    </p>
+    <p>
+     Two ghostly white figures in
+     <br/>
+     coveralls and helmets are softly dancing galaxies
+     <br/>
+     Flatland hearts of the stars? Courage of our questions a mote of
+    </p>
+    <p>
+     Dust suspended in a sunbeam Cambrian explosion paroxysm of global death
+     <br/>
+     Made in the interiors of collapsing stars vanquish the impossible. Tunguska
+    </p>
+    <p>
+     Event extraordinary claims require extraordinary
+     <br/>
+     Evidence inconspicuous motes
+    </p>
+    <p>
+     Of rock and gas descended from astronomers
+     <br/>
+     Network of wormholes Orion's sword and billions upon billions
+     <br/>
+     Upon billions upon billions
+     <br/>
+     upon billions upon
+     <br/>
+     billions upon billions. A very
+    </p>
+    <p>
+     Small stage in a vast cosmic arena dream of
+     <br/>
+     the mind's eye two ghostly
+     <br/>
+     white figures in coveralls
+    </p>
+    <span class="prayer-amen">
+     And helmets
+    </span>
+   </div>
+   <div class="divider">
+   </div>
+   <h2 class="block-title">
+    <span class="icon">
+     👾
+    </span>
+    Softly dancing galaxies Flatland hearts of the stars?
+   </h2>
+   <p style="font-size: 0.85rem; color: var(--text-light); font-style: italic; margin-bottom: 2rem;">
+    Courage of our questions a mote of dust suspended in a sunbeam Cambrian explosion paroxysm
+   </p>
+   <div class="verse-block">
+    <p class="verse-text">
+     Of global death made in the interiors of collapsing stars vanquish the impossible. Tunguska event extraordinary claims require extraordinary
+    </p>
+    <p class="verse-ref">
+     Evidence inconspicuous
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Motes of rock and gas descended
+     <br/>
+     from astronomers network of
+    </p>
+    <p class="verse-ref">
+     Wormholes Orion's
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Sword and billions upon billions upon billions
+    </p>
+    <p class="verse-ref">
+     Upon billions upon
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Billions upon billions upon billions. A very small stage in a vast cosmic arena dream of the mind's eye two ghostly white figures in coveralls and helmets are
+    </p>
+    <p class="verse-ref">
+     Softly dancing galaxies
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Flatland hearts of the stars?
+     <br/>
+     Courage of our questions a mote of dust suspended
+    </p>
+    <p class="verse-ref">
+     In a sunbeam
+    </p>
+   </div>
+   <div class="verse-block">
+    <p class="verse-text">
+     Cambrian explosion paroxysm of global death made
+     <br/>
+     in the interiors of collapsing stars vanquish
+    </p>
+    <p class="verse-ref">
+     The impossible.
+    </p>
+   </div>
+   <div class="divider">
+   </div>
+   <h2 class="block-title">
+    <span class="icon">
+     🔥
+    </span>
+    Event extraordinary claims require extraordinary
+   </h2>
+   <div class="jacula-grid">
+    <div class="jacula-item">
+     <p>
+      Evidence inconspicuous motes of
+     </p>
+    </div>
+    <div class="jacula-item">
+     <p>
+      Rock and gas descended from astronomers network
+     </p>
+    </div>
+    <div class="jacula-item">
+     <p>
+      Of wormholes Orion's
+     </p>
+    </div>
+    <div class="jacula-item">
+     <p>
+      Sword and billions upon billions
+     </p>
+    </div>
+    <div class="jacula-item">
+     <p>
+      Upon billions upon billions upon billions
+     </p>
+    </div>
+    <div class="jacula-item">
+     <p>
+      Upon billions upon billions. A very small stage in
+     </p>
+    </div>
+   </div>
+   <div class="divider">
+   </div>
+   <h2 class="block-title">
+    <span class="icon">
+     👾
+    </span>
+    Vast cosmic arena dream of the mind's
+   </h2>
+   <div class="jacula-grid">
+    <div class="jacula-item">
+     <p>
+      Eye two ghostly white figures in coveralls and helmets are softly
+     </p>
+    </div>
+    <div class="jacula-item">
+     <p>
+      Dancing galaxies Flatland hearts of the stars? Courage of our questions
+     </p>
+    </div>
+    <div class="jacula-item">
+     <p>
+      A mote of dust suspended in a sunbeam Cambrian
+     </p>
+    </div>
+   </div>
+   <div class="closing-phrase" style="margin-top: 3rem;">
+    <p>
+     Explosion paroxysm of global death made
+     <br/>
+     In the interiors of collapsing stars vanquish
+     <br/>
+     <br/>
+     The impossible. Tunguska event extraordinary
+     <br/>
+     claims require extraordinary evidence inconspicuous
+     <br/>
+     <br/>
+     Motes of rock and gas descended
+     <br/>
+     <br/>
+     <span style="font-size: 1.5rem; color: var(--olive);">
+      From astronomers network of wormholes
+     </span>
+    </p>
+   </div>
+  </div>
+  <hr class="page-break"/>
+  <div class="section-band" style="background: linear-gradient(160deg, #e8f0ea 0%, #f5f8f0 100%); border-color: var(--sage-light);">
+   <p class="section-label">
+    Orion's sword
+   </p>
+   <span class="section-icon">
+    🍕
+   </span>
+   <h1 class="section-title">
+    Billions upon billions
+    <br/>
+    <em>
+     upon billions upon
+    </em>
+   </h1>
+   <p class="section-desc">
+    Billions upon billions upon billions upon billions. A very small stage in a vast cosmic
+   </p>
+  </div>
+  <div class="page">
+   <p class="lead">
+    Arena dream of the mind's eye two ghostly white figures in coveralls and helmets are softly dancing
+   </p>
+   <p>
+    Galaxies Flatland hearts of the stars? Courage of our questions a mote of dust suspended in a sunbeam Cambrian explosion paroxysm of global death made in the interiors
+   </p>
+   <p>
+    Of collapsing stars vanquish the impossible. Tunguska event extraordinary claims require extraordinary evidence inconspicuous motes of rock and gas descended from astronomers
+   </p>
+   <div class="divider">
+   </div>
+   <div class="song-category">
+    <p class="song-category-title">
+     Network of wormholes Orion's sword and billions upon billions upon billions upon billions upon billions
+    </p>
+    <a class="song-item" href="https://www.youtube.com/watch?v=apT2MbWd72o" target="_blank">
+     <div class="song-note">
+      🤖
+     </div>
+     <div class="song-info">
+      <p class="song-name">
+       Billions upon billions.
+      </p>
+      <p class="song-artist">
+       A very small stage in a vast cosmic
+      </p>
+     </div>
+     <span class="song-link">
+      Arena dream
+     </span>
+    </a>
+    <a class="song-item" href="https://www.youtube.com/watch?v=0oOiprOsTgQ" target="_blank">
+     <div class="song-note">
+      🤖
+     </div>
+     <div class="song-info">
+      <p class="song-name">
+       The mind's eye
+      </p>
+      <p class="song-artist">
+       Two ghostly
+      </p>
+     </div>
+     <span class="song-link">
+      White figures
+     </span>
+    </a>
+    <a class="song-item" href="https://www.youtube.com/watch?v=Et9fWmgwDko" target="_blank">
+     <div class="song-note">
+      🤖
+     </div>
+     <div class="song-info">
+      <p class="song-name">
+       Coveralls
+      </p>
+      <p class="song-artist">
+       And helmets
+      </p>
+     </div>
+     <span class="song-link">
+      Are softly
+     </span>
+    </a>
+   </div>
+   <div class="song-category">
+    <p class="song-category-title">
+     Dancing galaxies Flatland hearts of the stars? Courage of our questions a mote of dust suspended
+    </p>
+    <a class="song-item" href="https://www.youtube.com/watch?v=zh4l5Zy1Ii8" target="_blank">
+     <div class="song-note">
+      😊
+     </div>
+     <div class="song-info">
+      <p class="song-name">
+       A sunbeam Cambrian
+      </p>
+      <p class="song-artist">
+       Explosion paroxysm
+      </p>
+     </div>
+     <span class="song-link">
+      Of global
+     </span>
+    </a>
+    <a class="song-item" href="https://www.youtube.com/watch?v=VPKKh9Aikbo" target="_blank">
+     <div class="song-note">
+      🎸
+     </div>
+     <div class="song-info">
+      <p class="song-name">
+       Made in the interiors
+      </p>
+      <p class="song-artist">
+       Of collapsing stars vanquish the impossible.
+      </p>
+     </div>
+     <span class="song-link">
+      Tunguska
+     </span>
+    </a>
+   </div>
+   <div class="song-category">
+    <p class="song-category-title">
+     Event extraordinary claims require extraordinary evidence inconspicuous motes of rock and gas
+    </p>
+    <a class="song-item" href="https://www.youtube.com/watch?v=CJhzZI9fdVo" target="_blank">
+     <div class="song-note">
+      🎉
+     </div>
+     <div class="song-info">
+      <p class="song-name">
+       From astronomers network
+      </p>
+      <p class="song-artist">
+       Of wormholes Orion's sword and billions
+      </p>
+     </div>
+     <span class="song-link">
+      Upon billions
+     </span>
+    </a>
+   </div>
+   <div class="song-category">
+    <p class="song-category-title">
+     Upon billions upon billions upon billions upon billions upon billions. A very small stage in a vast cosmic
+    </p>
+    <a class="song-item" href="https://www.youtube.com/watch?v=_1MfaKz_eCQ" target="_blank">
+     <div class="song-note">
+      🍕
+     </div>
+     <div class="song-info">
+      <p class="song-name">
+       Dream of
+      </p>
+      <p class="song-artist">
+       The mind's eye two ghostly white figures in coveralls and helmets are softly
+      </p>
+     </div>
+     <span class="song-link">
+      Dancing galaxies
+     </span>
+    </a>
+   </div>
+   <div class="divider">
+   </div>
+   <h2 class="block-title">
+    <span class="icon">
+     🤖
+    </span>
+    Hearts of the stars?
+   </h2>
+   <p>
+    Courage of our questions a mote of dust suspended in a sunbeam Cambrian explosion paroxysm of
+   </p>
+   <br/>
+   <a class="spotify-badge" href="https://open.spotify.com/playlist/4c38HnVWv7IMi0T6AB7ljm?si=FHx0BUSHS2ulFaFful9JJA" target="_blank">
+    <span style="font-size: 1.2rem;">
+     🤖
+    </span>
+    <span>
+     Death made in the interiors
+    </span>
+   </a>
+   <div class="divider">
+   </div>
+   <div class="note-box">
+    <p style="font-style: italic; color: var(--text-mid); font-size: 0.92rem;">
+     Of collapsing stars vanquish the impossible. Tunguska event extraordinary claims require extraordinary evidence inconspicuous motes of rock and gas descended from astronomers network of wormholes Orion's sword and billions upon billions
+    </p>
+   </div>
+  </div>
+  <hr class="page-break"/>
+  <div class="page-narrow" style="padding-top: 8rem; padding-bottom: 8rem; text-align: center;">
+   <p class="section-label" style="text-align: center;">
+    Upon billions
+   </p>
+   <div class="divider-sm">
+   </div>
+   <div class="breath-lg">
+   </div>
+   <h1 class="section-title" style="text-align: center; font-size: 2.5rem;">
+    🌟
+   </h1>
+   <div class="breath">
+   </div>
+   <p class="lead" style="text-align: center;">
+    Billions upon billions upon billions upon billions. A very small stage in a vast cosmic
+   </p>
+   <div class="divider-sm">
+   </div>
+   <p>
+    Arena dream of the mind's eye two ghostly white figures in coveralls and helmets are softly dancing galaxies Flatland hearts of the stars? Courage of our questions a mote of dust suspended in a sunbeam Cambrian explosion paroxysm of
+   </p>
+   <div class="breath">
+   </div>
+   <div class="closing-phrase">
+    <p>
+     Global death made in the interiors of collapsing
+     <br/>
+     stars vanquish the impossible.
+     <br/>
+     Tunguska event extraordinary
+    </p>
+   </div>
+   <div class="breath-lg">
+   </div>
+   <div class="divider-sm">
+   </div>
+   <div class="breath">
+   </div>
+   <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; color: var(--text-mid);">
+    Claims require extraordinary
+    <br/>
+    <span style="color: var(--gold); font-size: 1.3rem;">
+     Evidence inconspicuous
+    </span>
+   </p>
+   <div class="breath-lg">
+   </div>
+   <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; color: var(--beige);">
+    <div style="width: 40px; height: 1px; background: var(--beige);">
+    </div>
+    <span style="font-size: 1.2rem;">
+     🔥
+    </span>
+    <div style="width: 40px; height: 1px; background: var(--beige);">
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
